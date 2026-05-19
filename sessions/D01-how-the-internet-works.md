@@ -376,6 +376,127 @@ dig google.com | grep -A5 "ANSWER SECTION"
 
 ---
 
+---
+
+## The Complete Flow — One Example Connecting Everything
+
+You open your laptop at home and type `https://www.google.com` and hit Enter.
+
+---
+
+**Your laptop has IP `192.168.1.5` — a private IP assigned by your router via DHCP.**
+Your router's public IP (given by ISP) is `203.45.12.88`.
+The internet only knows `203.45.12.88`. Your `192.168.1.5` doesn't exist outside your home.
+
+---
+
+**Step 1 — Browser needs Google's IP. DNS lookup begins.**
+
+```
+Browser cache     → miss
+OS cache          → miss
+Recursive Resolver (8.8.8.8) → not cached, starts hunting
+
+  Asks Root Name Server (198.41.0.4):
+    Root: "I don't know. .com is managed by 192.5.6.30"
+
+  Asks .com TLD Server (192.5.6.30):
+    TLD: "I don't know the IP. google.com's auth server is ns1.google.com"
+
+  Asks Google's Authoritative Server (ns1.google.com):
+    Auth: "www.google.com → 142.250.80.4  TTL: 300s"
+
+Answer flows back → everyone caches it for 300s
+```
+
+**Google's IP: `142.250.80.4`**
+
+---
+
+**Step 2 — TCP connection to `142.250.80.4:443`**
+
+Port 443 because `https://` — browser adds it automatically as default.
+
+Your laptop sends:
+```
+From: 192.168.1.5:54231  →  To: 142.250.80.4:443
+```
+
+**NAT happens at your router:**
+- Rewrites source: `192.168.1.5:54231` → `203.45.12.88:54231`
+- Saves in NAT table: `192.168.1.5:54231 ←→ 203.45.12.88:54231`
+- Sends packet to internet
+
+Packet crosses ~20 routers worldwide. Takes ~200ms (India → US, speed of light).
+
+**TCP 3-way handshake:**
+```
+Laptop  →  SYN (seq=3271)              →  Google
+Laptop  ←  SYN-ACK (seq=8642, ack=3272) ←  Google
+Laptop  →  ACK (ack=8643)              →  Google
+```
+Both sides synced on sequence numbers. Connection established.
+
+Google's replies come back to `203.45.12.88:54231`. Router checks NAT table → rewrites to `192.168.1.5:54231` → delivers to your laptop.
+
+---
+
+**Step 3 — TLS handshake. Encryption setup.**
+
+```
+Laptop  →  "TLS 1.3, here are cipher options + key share for X25519"
+Google  ←  "Here's my certificate (signed by DigiCert, valid for google.com)"
+```
+
+Browser verifies certificate:
+- DigiCert's signature valid? ✓
+- Domain matches `google.com`? ✓
+- Not expired? ✓
+
+Both sides derive encryption keys. Everything from here is encrypted.
+Your ISP, coffee shop router, every hop in between — all see garbage bytes.
+
+---
+
+**Step 4 — HTTP Request**
+
+```http
+GET / HTTP/2
+Host: www.google.com
+User-Agent: Chrome/120
+```
+
+Sent encrypted over the TCP connection.
+
+---
+
+**Step 5 — Google responds**
+
+```http
+HTTP/2 200 OK
+Content-Type: text/html
+
+<!DOCTYPE html>...
+```
+
+Response broken into TCP packets, numbered by sequence numbers.
+Arrive possibly out of order → TCP reassembles correctly → browser renders.
+
+---
+
+**Total time: ~600ms (India → US, TLS 1.3, no CDN)**
+
+```
+DNS lookup         ~100ms
+TCP handshake      ~200ms   ← physics, can't avoid
+TLS handshake      ~200ms   ← 1 round trip with TLS 1.3
+HTTP request/resp  ~200ms
+```
+
+With a CDN in Mumbai → TCP + TLS terminate locally in ~20ms → page loads in ~100ms.
+
+---
+
 ## Key Terms Glossary
 
 | Term | Meaning |

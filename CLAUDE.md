@@ -24,7 +24,7 @@
 
 ### How the Web Works
 - [x] D01 — How the Internet Works (DNS, TCP/IP, HTTP lifecycle)
-- [ ] D02 — Client-Server Architecture + Request-Response model
+- [x] D02 — Client-Server Architecture + Request-Response model
 - [ ] D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why
 - [ ] D04 — TLS/HTTPS — handshake, certificates, why it matters
 - [ ] D05 — REST API design — methods, status codes, idempotency
@@ -109,6 +109,6 @@
 ---
 
 ## Progress
-- Current day: D02
-- Last completed: D01 — How the Internet Works (2026-05-19)
-- Streak: 1 day
+- Current day: D03
+- Last completed: D02 — Client-Server Architecture + Request-Response (2026-05-20)
+- Streak: 2 days

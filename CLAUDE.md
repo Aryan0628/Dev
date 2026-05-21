@@ -17,6 +17,7 @@
 - Go deep on concepts when asked, never rush
 - Use analogies before technical definitions
 - Every session saves a cheatsheet in sessions/Dxx-topic.md
+- **Read `personalization.md` before every session** — it tracks Aryan's learning pattern and how to craft better responses
 
 ---
 
@@ -25,7 +26,7 @@
 ### How the Web Works
 - [x] D01 — How the Internet Works (DNS, TCP/IP, HTTP lifecycle)
 - [x] D02 — Client-Server Architecture + Request-Response model
-- [ ] D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why
+- [x] D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why
 - [ ] D04 — TLS/HTTPS — handshake, certificates, why it matters
 - [ ] D05 — REST API design — methods, status codes, idempotency
 
@@ -109,6 +110,6 @@
 ---
 
 ## Progress
-- Current day: D03
-- Last completed: D02 — Client-Server Architecture + Request-Response (2026-05-20)
-- Streak: 2 days
+- Current day: D04
+- Last completed: D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 (2026-05-21)
+- Streak: 3 days

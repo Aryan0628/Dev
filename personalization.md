@@ -50,6 +50,13 @@ When teaching a concept, ask yourself:
 | D03 | "HTTP/3 doesn't use a socket?" | Gap: thought socket = TCP specifically |
 | D03 | "Handler routing?" | Wanted to connect new transport knowledge back to D02 routing |
 | D03 | "When client sends SYN, how does server know to open a socket?" | Gap: didn't know listening socket pre-exists before any client connects |
+| D04 | "How does server verify it is trusted client?" | Flipped the model — assumed TLS is bidirectional by default |
+| D04 | "Are the public keys the same?" | Confused certificate public key [identity] with ECDHE key share [key exchange] — needs explicit separation of purposes |
+| D04 | "Where is private key used?" | Good systems thinking — traced the key's role through the whole flow |
+| D04 | "You said only public key is sent but then mentioned private key?" | Caught imprecision — needed clarity that signature travels, not the key |
+| D04 | "Why ECDHE if DigiCert already verified?" | Excellent conceptual question — needed explicit separation of identity vs encryption |
+| D04 | "ECDHE per packet or per connection?" | Connected new concept to prior TCP/connection knowledge from D01/D03 |
+| D04 | "Same client requesting two routes — what happens?" | Connected to D03 multiplexing knowledge — good cross-session thinking |
 
 ---
 

@@ -8,7 +8,7 @@
   3. **How it works internally** (15 min) — what happens under the hood
   4. **Code / config example** (10 min) — minimal real snippet
   5. **Trade-offs & when NOT to use it** (5 min)
-  6. **3 quiz questions** (5 min) — you answer, I correct
+  6. **3 quiz questions + answers** (5 min) — you answer, I correct; answers always included in cheatsheet
 - Archon is used as reference source, not copy-paste
 - Track progress: mark [x] when done
 
@@ -27,7 +27,7 @@
 - [x] D01 — How the Internet Works (DNS, TCP/IP, HTTP lifecycle)
 - [x] D02 — Client-Server Architecture + Request-Response model
 - [x] D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why
-- [ ] D04 — TLS/HTTPS — handshake, certificates, why it matters
+- [x] D04 — TLS/HTTPS — handshake, certificates, why it matters
 - [ ] D05 — REST API design — methods, status codes, idempotency
 
 ### Core Backend Concepts
@@ -110,6 +110,6 @@
 ---
 
 ## Progress
-- Current day: D04
-- Last completed: D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 (2026-05-21)
-- Streak: 3 days
+- Current day: D05
+- Last completed: D04 — TLS/HTTPS (2026-05-22)
+- Streak: 4 days

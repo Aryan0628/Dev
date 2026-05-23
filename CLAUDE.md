@@ -21,7 +21,7 @@
 
 ---
 
-## Phase 1 — Foundations (Weeks 1–2)
+## Phase 1 — Foundations (D01–D13)
 
 ### How the Web Works
 - [x] D01 — How the Internet Works (DNS, TCP/IP, HTTP lifecycle)
@@ -34,78 +34,129 @@
 - [ ] D06 — Processes vs Threads vs Async (event loop, blocking vs non-blocking)
 - [ ] D07 — How a web server works (Nginx internals, reverse proxy)
 - [ ] D08 — Load Balancing — L4 vs L7, algorithms (round robin, least conn, sticky)
-- [ ] D09 — API Gateway — what it is, rate limiting, auth at the edge
-- [ ] D10 — WebSockets vs Long Polling vs SSE — when to use which
+- [ ] D09 — Auth fundamentals — session vs JWT vs OAuth 2.0 *(moved up from Security — needed before API Gateway makes full sense)*
+- [ ] D10 — API Gateway — what it is, rate limiting, auth at the edge
+- [ ] D11 — WebSockets vs Long Polling vs SSE — when to use which
+- [ ] D12 — API Versioning — how to evolve APIs without breaking clients *(new)*
+
+### Phase 1 Wrap-up
+- [ ] D13 — **Revision Day** — revisit D06–D12, redo any quiz questions you got wrong
 
 ---
 
-## Phase 2 — Databases (Weeks 3–4)
+## Phase 2 — Databases (D14–D28)
 
-- [ ] D11 — SQL fundamentals for production (indexes, EXPLAIN, N+1 problem)
-- [ ] D12 — PostgreSQL internals — MVCC, WAL, vacuum
-- [ ] D13 — Indexing deep dive — B-Tree, composite, partial, covering indexes
-- [ ] D14 — SQL vs NoSQL — when to pick which and why
-- [ ] D15 — Database replication — primary-replica, replication lag, read scaling
-- [ ] D16 — Sharding — horizontal partitioning, shard keys, hotspots
-- [ ] D17 — Transactions — ACID, isolation levels, deadlocks
-- [ ] D18 — Connection pooling — why it matters, PgBouncer
-- [ ] D19 — Redis internals — data structures, persistence (RDB vs AOF)
-- [ ] D20 — Multi-region databases — read replicas, active-active
+- [ ] D14 — SQL fundamentals for production (indexes, EXPLAIN, N+1 problem)
+- [ ] D15 — PostgreSQL internals — MVCC, WAL, vacuum
+- [ ] D16 — Indexing deep dive — B-Tree, composite, partial, covering indexes
+- [ ] D17 — SQL vs NoSQL — when to pick which and why
+- [ ] D18 — CAP theorem / PACELC — consistency vs availability trade-offs *(new — foundational for all distributed systems)*
+- [ ] D19 — Database replication — primary-replica, replication lag, read scaling
+- [ ] D20 — Sharding — horizontal partitioning, shard keys, hotspots
+- [ ] D21 — Consistent hashing — how it solves sharding and caching problems *(new)*
+- [ ] D22 — Transactions Part 1 — ACID properties, isolation levels
+- [ ] D23 — Transactions Part 2 — deadlocks, practical patterns, when to avoid transactions *(split — too much for one session)*
+- [ ] D24 — Connection pooling — why it matters, PgBouncer
+- [ ] D25 — Redis internals — data structures, persistence (RDB vs AOF)
+- [ ] D26 — Multi-region databases — read replicas, active-active
+- [ ] D27 — Database migrations — zero-downtime migrations, expand-contract pattern *(new)*
 
----
-
-## Phase 3 — Caching & Queues (Week 5)
-
-- [ ] D21 — Caching strategies — cache-aside, write-through, write-behind
-- [ ] D22 — Cache invalidation — TTL, event-driven, cache stampede / thundering herd
-- [ ] D23 — CDN deep dive — edge caching, cache-control headers, purging
-- [ ] D24 — Message queues overview — why async matters, at-least-once vs exactly-once
-- [ ] D25 — Kafka internals — partitions, offsets, consumer groups, retention
+### Phase 2 Wrap-up
+- [ ] D28 — **Revision Day** — revisit D14–D27, focus on CAP theorem + isolation levels
 
 ---
 
-## Phase 4 — System Design Patterns (Weeks 6–7)
+## Phase 3 — Caching & Queues (D29–D35)
 
-- [ ] D26 — Scaling fundamentals — vertical vs horizontal, stateless services
-- [ ] D27 — Zero to million users — how a system evolves step by step
-- [ ] D28 — Microservices vs Monolith — trade-offs, when to split
-- [ ] D29 — gRPC vs REST — protobuf, streaming, when to prefer gRPC
-- [ ] D30 — Event-driven architecture — pub/sub, event sourcing basics
-- [ ] D31 — Idempotency — why it matters, how to implement it
-- [ ] D32 — Distributed transactions — 2PC, saga pattern
-- [ ] D33 — Rate limiting — token bucket, sliding window, implementation
-- [ ] D34 — Circuit breaker pattern — failure isolation, retry strategies
-- [ ] D35 — Design a URL shortener (end-to-end system design session)
+- [ ] D29 — Caching strategies — cache-aside, write-through, write-behind
+- [ ] D30 — Cache invalidation — TTL, event-driven, cache stampede / thundering herd
+- [ ] D31 — CDN deep dive — edge caching, cache-control headers, purging
+- [ ] D32 — Message queues overview — why async matters, at-least-once vs exactly-once
+- [ ] D33 — Kafka internals Part 1 — topics, partitions, offsets, producers
+- [ ] D34 — Kafka internals Part 2 — consumer groups, retention, rebalancing *(split — consumer groups alone need a full session)*
 
----
-
-## Phase 5 — Observability (Week 8)
-
-- [ ] D36 — Logging for production — structured logs, log levels, what to log
-- [ ] D37 — Metrics — RED method (Rate, Errors, Duration), Prometheus basics
-- [ ] D38 — Distributed tracing — spans, trace IDs, OpenTelemetry
-- [ ] D39 — Alerting — SLI/SLO/SLA, alert fatigue, runbooks
-- [ ] D40 — Debugging in production — reading stack traces, profiling basics
+### Phase 3 Wrap-up
+- [ ] D35 — **Revision Day** — cache invalidation + Kafka consumer groups are the hardest parts here
 
 ---
 
-## Phase 6 — Security (Week 9)
+## Phase 4 — System Design Patterns (D36–D48)
 
-- [ ] D41 — Auth fundamentals — session vs JWT vs OAuth 2.0
-- [ ] D42 — OWASP Top 10 — SQL injection, XSS, CSRF, IDOR
-- [ ] D43 — Secrets management — env vars, Vault, never in code
-- [ ] D44 — Network security — firewalls, VPC, private subnets, zero-trust
-- [ ] D45 — Input validation & rate limiting for security
+- [ ] D36 — Scaling fundamentals — vertical vs horizontal, stateless services
+- [ ] D37 — Zero to million users — how a system evolves step by step
+- [ ] D38 — Microservices vs Monolith — trade-offs, when to split
+- [ ] D39 — gRPC vs REST — protobuf, streaming, when to prefer gRPC
+- [ ] D40 — Event-driven architecture — pub/sub, event sourcing basics
+- [ ] D41 — Idempotency — why it matters, how to implement it
+- [ ] D42 — Distributed transactions Part 1 — 2PC (Two-Phase Commit), where it breaks
+- [ ] D43 — Distributed transactions Part 2 — Saga pattern, choreography vs orchestration *(split — architecturally very different from 2PC)*
+- [ ] D44 — Rate limiting — token bucket, sliding window, implementation
+- [ ] D45 — Circuit breaker pattern — failure isolation, retry strategies
+- [ ] D46 — Feature flags — rollout strategies, kill switches, A/B testing *(new)*
+- [ ] D47 — Design a URL shortener (end-to-end system design session)
+
+### Phase 4 Wrap-up
+- [ ] D48 — **Revision Day** — Saga vs 2PC + circuit breaker are interview favourites, go deep
 
 ---
 
-## Phase 7 — DevOps & Cloud (Week 10)
+## Phase 5 — Observability (D49–D55)
 
-- [ ] D46 — Docker — images, containers, layers, multi-stage builds
-- [ ] D47 — Kubernetes basics — pods, deployments, services, ingress
-- [ ] D48 — CI/CD pipeline — build, test, deploy, rollback strategies
-- [ ] D49 — Infrastructure as Code — Terraform basics
-- [ ] D50 — Cloud fundamentals — AWS core services (EC2, S3, RDS, SQS, Lambda)
+- [ ] D49 — Logging for production — structured logs, log levels, what to log
+- [ ] D50 — Metrics — RED method (Rate, Errors, Duration), Prometheus basics
+- [ ] D51 — Distributed tracing — spans, trace IDs, OpenTelemetry
+- [ ] D52 — Alerting — SLI/SLO/SLA, alert fatigue, runbooks
+- [ ] D53 — Debugging in production — reading stack traces, profiling basics
+- [ ] D54 — Incident response — on-call, postmortems, blameless culture *(new — what do you DO when alerts fire?)*
+
+### Phase 5 Wrap-up
+- [ ] D55 — **Revision Day** — SLI/SLO/SLA definitions and RED method
+
+---
+
+## Phase 6 — Security (D56–D61)
+
+> Note: Auth fundamentals (JWT, OAuth) already covered in D09
+
+- [ ] D56 — OWASP Part 1 — SQL injection, XSS, CSRF in depth *(split — 10 vectors in 1 hour = surface level only)*
+- [ ] D57 — OWASP Part 2 — IDOR, broken auth, security misconfigurations, others
+- [ ] D58 — Secrets management — env vars, Vault, never in code
+- [ ] D59 — Network security — firewalls, VPC, private subnets, zero-trust
+- [ ] D60 — Input validation & rate limiting for security
+
+### Phase 6 Wrap-up
+- [ ] D61 — **Revision Day** — OWASP top 10 from memory, then check
+
+---
+
+## Phase 7 — DevOps & Cloud (D62–D70)
+
+- [ ] D62 — Docker Part 1 — images, containers, layers
+- [ ] D63 — Docker Part 2 — multi-stage builds, networking, volumes, docker-compose *(split — too much for one session)*
+- [ ] D64 — Kubernetes Part 1 — pods, deployments, why K8s exists
+- [ ] D65 — Kubernetes Part 2 — services, ingress, configmaps, secrets *(split)*
+- [ ] D66 — Kubernetes Part 3 — scaling, health checks, production patterns, when NOT to use K8s *(split)*
+- [ ] D67 — CI/CD pipeline — build, test, deploy, rollback strategies
+- [ ] D68 — Infrastructure as Code — Terraform basics
+- [ ] D69 — Cloud fundamentals — AWS core services (EC2, S3, RDS, SQS, Lambda)
+
+### Phase 7 Wrap-up
+- [ ] D70 — **Revision Day** — K8s concepts + Terraform basics
+
+---
+
+## Progress Tracker
+
+| Phase | Days | Status |
+|---|---|---|
+| Phase 1 — Foundations | D01–D13 | 5/13 done |
+| Phase 2 — Databases | D14–D28 | 0/15 done |
+| Phase 3 — Caching & Queues | D29–D35 | 0/7 done |
+| Phase 4 — System Design | D36–D48 | 0/13 done |
+| Phase 5 — Observability | D49–D55 | 0/7 done |
+| Phase 6 — Security | D56–D61 | 0/6 done |
+| Phase 7 — DevOps & Cloud | D62–D70 | 0/9 done |
+| **Total** | **D01–D70** | **5/70 done** |
 
 ---
 

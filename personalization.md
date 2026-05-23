@@ -57,6 +57,7 @@ When teaching a concept, ask yourself:
 | D04 | "Why ECDHE if DigiCert already verified?" | Excellent conceptual question — needed explicit separation of identity vs encryption |
 | D04 | "ECDHE per packet or per connection?" | Connected new concept to prior TCP/connection knowledge from D01/D03 |
 | D04 | "Same client requesting two routes — what happens?" | Connected to D03 multiplexing knowledge — good cross-session thinking |
+| D05 | "So REST API is just how to use HTTP? That's all?" | Excellent compression — he distilled the whole session into one accurate insight; confirms he builds correct mental models quickly |
 
 ---
 

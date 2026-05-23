@@ -28,7 +28,7 @@
 - [x] D02 — Client-Server Architecture + Request-Response model
 - [x] D03 — HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why
 - [x] D04 — TLS/HTTPS — handshake, certificates, why it matters
-- [ ] D05 — REST API design — methods, status codes, idempotency
+- [x] D05 — REST API design — methods, status codes, idempotency
 
 ### Core Backend Concepts
 - [ ] D06 — Processes vs Threads vs Async (event loop, blocking vs non-blocking)
@@ -110,6 +110,6 @@
 ---
 
 ## Progress
-- Current day: D05
-- Last completed: D04 — TLS/HTTPS (2026-05-22)
-- Streak: 4 days
+- Current day: D06
+- Last completed: D05 — REST API Design (2026-05-23)
+- Streak: 5 days

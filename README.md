@@ -1,6 +1,6 @@
 # Production Dev Learning Journey
 
-A 50-day, one-topic-a-day roadmap to learn how production backend systems actually work — from the bytes on the wire to scaling a service to millions of users.
+A 70-day, one-topic-a-day roadmap to learn how production backend systems actually work — from the bytes on the wire to scaling a service to millions of users.
 
 Each session is taught conversationally with Claude, then distilled into a cheatsheet I can come back to later.
 
@@ -23,9 +23,9 @@ After each session, a cheatsheet is saved in [`sessions/`](sessions/) so I can g
 
 ## Progress
 
-**Current day:** D03
-**Streak:** 2 days
-**Last completed:** D02 — Client-Server Architecture + Request-Response
+**Current day:** D06
+**Streak:** 5 days
+**Last completed:** D05 — REST API Design
 
 ### Completed
 
@@ -33,8 +33,11 @@ After each session, a cheatsheet is saved in [`sessions/`](sessions/) so I can g
 |---|---|---|
 | D01 | How the Internet Works (DNS, TCP/IP, TLS, HTTP) | [D01](sessions/D01-how-the-internet-works.md) |
 | D02 | Client-Server Architecture + Request-Response | [D02](sessions/D02-client-server-architecture.md) |
+| D03 | HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why | [D03](sessions/D03-http-versions.md) |
+| D04 | TLS/HTTPS — handshake, certificates, why it matters | [D04](sessions/D04-tls-https.md) |
+| D05 | REST API Design — methods, status codes, idempotency | [D05](sessions/D05-rest-api-design.md) |
 
-See [CLAUDE.md](CLAUDE.md) for the full 50-day roadmap across 7 phases.
+See [CLAUDE.md](CLAUDE.md) for the full 70-day roadmap across 7 phases.
 
 ---
 
@@ -42,13 +45,13 @@ See [CLAUDE.md](CLAUDE.md) for the full 50-day roadmap across 7 phases.
 
 | Phase | Topic | Days |
 |---|---|---|
-| 1 | Foundations — how the web works, core backend concepts | D01–D10 |
-| 2 | Databases — SQL, Postgres internals, replication, sharding | D11–D20 |
-| 3 | Caching & Queues — CDNs, Redis, Kafka | D21–D25 |
-| 4 | System Design Patterns — scaling, microservices, distributed | D26–D35 |
-| 5 | Observability — logging, metrics, tracing, alerting | D36–D40 |
-| 6 | Security — auth, OWASP, secrets, network security | D41–D45 |
-| 7 | DevOps & Cloud — Docker, K8s, CI/CD, AWS | D46–D50 |
+| 1 | Foundations — how the web works, core backend concepts | D01–D13 |
+| 2 | Databases — SQL, Postgres internals, replication, sharding | D14–D28 |
+| 3 | Caching & Queues — CDNs, Redis, Kafka | D29–D35 |
+| 4 | System Design Patterns — scaling, microservices, distributed | D36–D48 |
+| 5 | Observability — logging, metrics, tracing, alerting | D49–D55 |
+| 6 | Security — auth, OWASP, secrets, network security | D56–D61 |
+| 7 | DevOps & Cloud — Docker, K8s, CI/CD, AWS | D62–D70 |
 
 ---
 
@@ -60,7 +63,10 @@ Dev/
 ├── README.md       # this file
 └── sessions/       # one cheatsheet per day
     ├── D01-how-the-internet-works.md
-    └── D02-client-server-architecture.md
+    ├── D02-client-server-architecture.md
+    ├── D03-http-versions.md
+    ├── D04-tls-https.md
+    └── D05-rest-api-design.md
 ```
 
 ---

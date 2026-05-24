@@ -58,6 +58,12 @@ When teaching a concept, ask yourself:
 | D04 | "ECDHE per packet or per connection?" | Connected new concept to prior TCP/connection knowledge from D01/D03 |
 | D04 | "Same client requesting two routes — what happens?" | Connected to D03 multiplexing knowledge — good cross-session thinking |
 | D05 | "So REST API is just how to use HTTP? That's all?" | Excellent compression — he distilled the whole session into one accurate insight; confirms he builds correct mental models quickly |
+| D06 | "That's why Python is called single-threaded?" | Confused GIL with single-threaded — needed explicit distinction: Python has real threads, Node.js is actually single-threaded |
+| D06 | "How can one thread see other sockets if each thread has its own stack?" | Gap: thought sockets were thread-owned — needed explicit clarification that sockets are process-level FDs, any thread can access any FD |
+| D06 | "Does a process need threads to exist?" | Excellent foundational question — wanted to confirm the process/thread relationship; every process needs at least 1 main thread |
+| D06 | "So when a thread sleeps timing does not apply, when epoll returns then timing applies?" | Perfect synthesis — confirmed he correctly understood BLOCKED state and when timer re-applies |
+| D06 | "What is the difference between thread blocking and async event loop?" | Connected the similarity (both BLOCKED, timer off) but wanted the core difference — thread blocked on one socket vs event loop blocked watching all sockets |
+| D06 | "If client gets Alt-Svc during TLS does it destroy TCP and switch to QUIC?" | Good sequence thinking — needed to clarify Alt-Svc arrives in HTTP response (after TCP+TLS), not during TLS; no mid-session switching |
 
 ---
 

@@ -31,7 +31,7 @@
 - [x] D05 — REST API design — methods, status codes, idempotency
 
 ### Core Backend Concepts
-- [ ] D06 — Processes vs Threads vs Async (event loop, blocking vs non-blocking)
+- [x] D06 — Processes vs Threads vs Async (event loop, blocking vs non-blocking)
 - [ ] D07 — How a web server works (Nginx internals, reverse proxy)
 - [ ] D08 — Load Balancing — L4 vs L7, algorithms (round robin, least conn, sticky)
 - [ ] D09 — Auth fundamentals — session vs JWT vs OAuth 2.0 *(moved up from Security — needed before API Gateway makes full sense)*
@@ -149,18 +149,18 @@
 
 | Phase | Days | Status |
 |---|---|---|
-| Phase 1 — Foundations | D01–D13 | 5/13 done |
+| Phase 1 — Foundations | D01–D13 | 6/13 done |
 | Phase 2 — Databases | D14–D28 | 0/15 done |
 | Phase 3 — Caching & Queues | D29–D35 | 0/7 done |
 | Phase 4 — System Design | D36–D48 | 0/13 done |
 | Phase 5 — Observability | D49–D55 | 0/7 done |
 | Phase 6 — Security | D56–D61 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D62–D70 | 0/9 done |
-| **Total** | **D01–D70** | **5/70 done** |
+| **Total** | **D01–D70** | **6/70 done** |
 
 ---
 
 ## Progress
-- Current day: D06
-- Last completed: D05 — REST API Design (2026-05-23)
-- Streak: 5 days
+- Current day: D07
+- Last completed: D06 — Processes vs Threads vs Async (2026-05-24)
+- Streak: 6 days

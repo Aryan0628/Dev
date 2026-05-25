@@ -64,6 +64,15 @@ When teaching a concept, ask yourself:
 | D06 | "So when a thread sleeps timing does not apply, when epoll returns then timing applies?" | Perfect synthesis — confirmed he correctly understood BLOCKED state and when timer re-applies |
 | D06 | "What is the difference between thread blocking and async event loop?" | Connected the similarity (both BLOCKED, timer off) but wanted the core difference — thread blocked on one socket vs event loop blocked watching all sockets |
 | D06 | "If client gets Alt-Svc during TLS does it destroy TCP and switch to QUIC?" | Good sequence thinking — needed to clarify Alt-Svc arrives in HTTP response (after TCP+TLS), not during TLS; no mid-session switching |
+| D07 | "Nginx os and my os having node js is different?" | Gap: thought Nginx and Node.js were on different machines/OS — same machine, same OS, two separate processes on localhost |
+| D07 | "One process only have one port — but in Model 1/2/3 multiple sockets were made on single port?" | Confused port binding with connections — bind() is done once; many connections can exist on same port via 4-tuple distinction |
+| D07 | "Nginx is listening socket so this process forks multiple processes as per request?" | Confused Nginx with Model 1 — Nginx forks workers ONCE at startup (fixed), never per connection; connections go to epoll, not new processes |
+| D07 | "In Model 3 also async one client was handled by one process, here multiple clients?" | Slight misremember — Model 3 already handled multiple clients on one thread; Nginx just runs N copies across CPU cores |
+| D07 | "So both Nginx and Node.js use async and epoll?" | Great synthesis — confirmed both use Model 3; different FDs, different purposes, same mechanism |
+| D07 | "So there are also 1000 connection sockets in Nginx model?" | Good confirmation — yes, 1000 Connection A sockets; but Connection B is a small shared pool (~32), not 1000 |
+| D07 | "For Nginx server the req is not client-based exactly — can reuse the connection?" | Spotted the pool insight — Connection B is shared/reused across all clients, not reserved per client |
+| D07 | "Client A used connection — next time client B can also use it?" | Confirmed pool is shared across ALL clients — safe because Connection B carries no client identity |
+| D07 | "What is Model 3's disadvantage — the 1000 sockets?" | Gap: thought sockets were the problem — every model opens one socket per client; disadvantage is CPU-heavy work on single thread |
 
 ---
 

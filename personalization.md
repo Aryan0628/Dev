@@ -73,6 +73,8 @@ When teaching a concept, ask yourself:
 | D07 | "For Nginx server the req is not client-based exactly — can reuse the connection?" | Spotted the pool insight — Connection B is shared/reused across all clients, not reserved per client |
 | D07 | "Client A used connection — next time client B can also use it?" | Confirmed pool is shared across ALL clients — safe because Connection B carries no client identity |
 | D07 | "What is Model 3's disadvantage — the 1000 sockets?" | Gap: thought sockets were the problem — every model opens one socket per client; disadvantage is CPU-heavy work on single thread |
+| D09 | "Did not understand the state/CSRF check in OAuth" | Abstract description ("trick your server") didn't land — needed a concrete attacker/victim story with named roles and step-by-step sequence to make the attack real |
+| D09 | "Wanted the full OAuth flow shown with browser + server + storage simultaneously" | Prefers parallel column format when multiple components interact at the same step — show what each layer sees at every moment, not just a single-thread narrative |
 
 ---
 

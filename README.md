@@ -23,9 +23,9 @@ After each session, a cheatsheet is saved in [`sessions/`](sessions/) so I can g
 
 ## Progress
 
-**Current day:** D06
-**Streak:** 5 days
-**Last completed:** D05 — REST API Design
+**Current day:** D10
+**Streak:** 9 days
+**Last completed:** D09 — Auth Fundamentals (session vs JWT vs OAuth 2.0)
 
 ### Completed
 
@@ -36,6 +36,10 @@ After each session, a cheatsheet is saved in [`sessions/`](sessions/) so I can g
 | D03 | HTTP/1.1 vs HTTP/2 vs HTTP/3 — what changed and why | [D03](sessions/D03-http-versions.md) |
 | D04 | TLS/HTTPS — handshake, certificates, why it matters | [D04](sessions/D04-tls-https.md) |
 | D05 | REST API Design — methods, status codes, idempotency | [D05](sessions/D05-rest-api-design.md) |
+| D06 | Processes vs Threads vs Async (event loop, blocking vs non-blocking) | [D06](sessions/D06-processes-threads-async.md) |
+| D07 | How a Web Server Works (Nginx internals, reverse proxy) | [D07](sessions/D07-web-server-nginx.md) |
+| D08 | Load Balancing — L4 vs L7, algorithms (round robin, least conn, sticky) | [D08](sessions/D08-load-balancing.md) |
+| D09 | Auth Fundamentals — session vs JWT vs OAuth 2.0 | [D09](sessions/D09-auth-fundamentals.md) |
 
 See [CLAUDE.md](CLAUDE.md) for the full 70-day roadmap across 7 phases.
 
@@ -66,7 +70,11 @@ Dev/
     ├── D02-client-server-architecture.md
     ├── D03-http-versions.md
     ├── D04-tls-https.md
-    └── D05-rest-api-design.md
+    ├── D05-rest-api-design.md
+    ├── D06-processes-threads-async.md
+    ├── D07-web-server-nginx.md
+    ├── D08-load-balancing.md
+    └── D09-auth-fundamentals.md
 ```
 
 ---

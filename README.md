@@ -23,9 +23,9 @@ After each session, a cheatsheet is saved in [`sessions/`](sessions/) so I can g
 
 ## Progress
 
-**Current day:** D10
-**Streak:** 9 days
-**Last completed:** D09 — Auth Fundamentals (session vs JWT vs OAuth 2.0)
+**Current day:** D11
+**Streak:** 10 days
+**Last completed:** D10 — API Gateway (rate limiting, auth at the edge, distributed rate limiting)
 
 ### Completed
 
@@ -40,6 +40,7 @@ After each session, a cheatsheet is saved in [`sessions/`](sessions/) so I can g
 | D07 | How a Web Server Works (Nginx internals, reverse proxy) | [D07](sessions/D07-web-server-nginx.md) |
 | D08 | Load Balancing — L4 vs L7, algorithms (round robin, least conn, sticky) | [D08](sessions/D08-load-balancing.md) |
 | D09 | Auth Fundamentals — session vs JWT vs OAuth 2.0 | [D09](sessions/D09-auth-fundamentals.md) |
+| D10 | API Gateway — rate limiting, auth at the edge, distributed rate limiting | [D10](sessions/D10-api-gateway.md) |
 
 See [CLAUDE.md](CLAUDE.md) for the full 70-day roadmap across 7 phases.
 
@@ -74,7 +75,8 @@ Dev/
     ├── D06-processes-threads-async.md
     ├── D07-web-server-nginx.md
     ├── D08-load-balancing.md
-    └── D09-auth-fundamentals.md
+    ├── D09-auth-fundamentals.md
+    └── D10-api-gateway.md
 ```
 
 ---

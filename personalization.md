@@ -41,6 +41,39 @@ When teaching a concept, ask yourself:
 
 ---
 
+## Per-Session Research & Content Standard
+
+### Research approach
+- **Primary sources: your own knowledge + web search.** These are deeper and more current than any reference tool.
+- **Archon is a supplementary lookup** — glance at it for structure or terminology checks, but never treat it as authoritative. If Archon contradicts what you know, trust what you know.
+- **Do not copy-paste from Archon** — synthesise everything in your own words, personalised to Aryan's level.
+
+### Real-world incidents are mandatory
+Every session must include **at least one real incident** — a known production failure, outage, or costly mistake related to the topic. Format it like this:
+
+> **Real case: [company/system] — [year if known]**
+> What happened: ...
+> Root cause: ...
+> Cost / impact: ...
+> What it would have taken to prevent it: ...
+
+Examples of the kind of cases to include: Knight Capital ($440M in 45 min from a deploy bug), Cloudflare global outage from a BGP misconfiguration, GitHub's MySQL replication lag, Slack's WebSocket thundering herd, etc.
+
+### Priority labelling
+Every major concept in the session must be tagged with priority so Aryan knows what to focus on for real systems:
+
+- **[CRITICAL]** — you will encounter this in production; getting it wrong causes outages
+- **[IMPORTANT]** — frequently appears in design interviews and real architectures
+- **[GOOD TO KNOW]** — useful context, not commonly tested or operationally urgent
+
+### Depth vs breadth
+- Go deep on **how it actually works** — not just what it is
+- Explain the failure modes — what breaks, how it breaks, why it's subtle
+- Call out the **most common mistake engineers make** with this concept (1–2 bullets)
+- Do not pad with edge cases that almost never happen — Aryan is learning for real systems, not trivia
+
+---
+
 ## Observed Doubting Pattern (update this over time)
 
 | Session | What he questioned | What it revealed |

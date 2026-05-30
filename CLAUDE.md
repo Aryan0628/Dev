@@ -1,15 +1,16 @@
 # Production Dev Learning Roadmap
 
 ## Teaching Format
-- Each session = 1 hour, one topic at a time
-- Structure per session:
-  1. **Why it matters** (5 min) — real-world problem it solves
-  2. **Core concept** (20 min) — explained with diagrams in text / analogies
-  3. **How it works internally** (15 min) — what happens under the hood
-  4. **Code / config example** (10 min) — minimal real snippet
-  5. **Trade-offs & when NOT to use it** (5 min)
-  6. **3 quiz questions + answers** (5 min) — you answer, I correct; answers always included in cheatsheet
-- Archon is used as reference source, not copy-paste
+- Each session = ~1.5 hours, one topic at a time (going a bit over is fine)
+- Structure per session — no fixed time per section, flow naturally:
+  1. **Why it matters** — real-world problem it solves; anchor with a real incident or failure that happened because someone got this wrong
+  2. **Core concept** — explained with diagrams in text / analogies
+  3. **How it works internally** — what happens under the hood; weave in failure modes and what breaks when the internals are misunderstood
+  4. **Code / config example** — minimal real snippet
+  5. **Trade-offs & when NOT to use it** — include the most common mistakes engineers make in production with this concept
+  6. **3 quiz questions + answers** — you answer, I correct; answers always included in cheatsheet
+- Real incidents and failure modes are not separate sections — they are woven into the relevant part of the session where the concept is taught
+- Archon is a supplementary lookup only; own knowledge + web are primary
 - Track progress: mark [x] when done
 
 ## Teaching Style Notes

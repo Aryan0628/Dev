@@ -38,7 +38,7 @@
 - [x] D09 — Auth fundamentals — session vs JWT vs OAuth 2.0 *(moved up from Security — needed before API Gateway makes full sense)*
 - [x] D10 — API Gateway — what it is, rate limiting, auth at the edge
 - [x] D11 — WebSockets vs Long Polling vs SSE — when to use which
-- [ ] D12 — API Versioning — how to evolve APIs without breaking clients *(new)*
+- [x] D12 — API Versioning — how to evolve APIs without breaking clients *(new)*
 
 ### Phase 1 Wrap-up
 - [ ] D13 — **Revision Day** — revisit D06–D12, redo any quiz questions you got wrong
@@ -150,7 +150,7 @@
 
 | Phase | Days | Status |
 |---|---|---|
-| Phase 1 — Foundations | D01–D13 | 12/13 done |
+| Phase 1 — Foundations | D01–D13 | 13/13 done |
 | Phase 2 — Databases | D14–D28 | 0/15 done |
 | Phase 3 — Caching & Queues | D29–D35 | 0/7 done |
 | Phase 4 — System Design | D36–D48 | 0/13 done |
@@ -162,6 +162,6 @@
 ---
 
 ## Progress
-- Current day: D12 — API Versioning
-- Last completed: D11 — WebSockets vs Long Polling vs SSE (revisit complete 2026-05-31)
-- Streak: 12 days
+- Current day: D13 — Revision Day (Phase 1 wrap-up)
+- Last completed: D12 — API Versioning (2026-05-31)
+- Streak: 13 days

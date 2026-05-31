@@ -37,7 +37,7 @@
 - [x] D08 — Load Balancing — L4 vs L7, algorithms (round robin, least conn, sticky)
 - [x] D09 — Auth fundamentals — session vs JWT vs OAuth 2.0 *(moved up from Security — needed before API Gateway makes full sense)*
 - [x] D10 — API Gateway — what it is, rate limiting, auth at the edge
-- [~] D11 — WebSockets vs Long Polling vs SSE — when to use which *(revisit: Redis pub/sub / WebSocket cross-instance scaling not fully understood — redo before D12)*
+- [x] D11 — WebSockets vs Long Polling vs SSE — when to use which
 - [ ] D12 — API Versioning — how to evolve APIs without breaking clients *(new)*
 
 ### Phase 1 Wrap-up
@@ -150,19 +150,18 @@
 
 | Phase | Days | Status |
 |---|---|---|
-| Phase 1 — Foundations | D01–D13 | 11/13 done |
+| Phase 1 — Foundations | D01–D13 | 12/13 done |
 | Phase 2 — Databases | D14–D28 | 0/15 done |
 | Phase 3 — Caching & Queues | D29–D35 | 0/7 done |
 | Phase 4 — System Design | D36–D48 | 0/13 done |
 | Phase 5 — Observability | D49–D55 | 0/7 done |
 | Phase 6 — Security | D56–D61 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D62–D70 | 0/9 done |
-| **Total** | **D01–D70** | **11/70 done** |
+| **Total** | **D01–D70** | **12/70 done** |
 
 ---
 
 ## Progress
-- Current day: D11 revisit (Redis pub/sub / WebSocket scaling)
-- Last completed: D10 — API Gateway (2026-05-30)
-- Streak: 11 days
-- Blocked on: D11 Redis pub/sub concept — must revisit before moving to D12
+- Current day: D12 — API Versioning
+- Last completed: D11 — WebSockets vs Long Polling vs SSE (revisit complete 2026-05-31)
+- Streak: 12 days

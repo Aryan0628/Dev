@@ -508,3 +508,59 @@ Instance 2 memory:
 **Note: two Redis connections needed per instance** — one for subscribing (always listening, can't also publish), one for publishing.
 
 **When this breaks at scale:** Every instance receives every message for every room, even rooms with zero local clients. At 10K rooms × 100 instances, most messages are received and discarded. Fix: Kafka, partitioned by room ID, so each instance only consumes messages for rooms it actually serves. This is why Discord/Slack moved from Redis pub/sub to Kafka at large scale.
+
+---
+
+### Subscribe vs Publish — the two roles, and why two Redis connections per instance
+
+**PUBLISH** = send a message into a channel. Fire and forget. The publisher doesn't know who's listening.
+
+**SUBSCRIBE** = register to receive all future messages on a channel. Redis pushes messages to you whenever anyone publishes.
+
+**The terminology trap — "client" means two different things here:**
+
+| Term | Means |
+|---|---|
+| **Redis client** | A library/connection your Node.js code uses to talk to Redis (e.g. `ioredis`) |
+| **WebSocket client** | A browser user connected to your server |
+
+These are completely unrelated. A Redis client is just a TCP connection from your backend to Redis.
+
+**Why each server instance needs two Redis clients:**
+
+Once you call SUBSCRIBE on a Redis connection, that connection enters a streaming receive mode — locked into listening. The Redis protocol does not allow you to send any other commands (including PUBLISH) on the same connection. Calling PUBLISH on a subscribed connection gets rejected.
+
+```
+Instance 2 (Node.js app)
+  │
+  ├── redisSubscriber (Redis client #1)
+  │     → called SUBSCRIBE room:42, room:99...
+  │     → Redis pushes messages here whenever anyone publishes to those rooms
+  │     → LOCKED — can only receive, cannot send commands
+  │
+  └── redisPublisher (Redis client #2)
+        → called when a WebSocket client sends a message: PUBLISH room:42 "hello"
+        → also used for regular Redis commands (GET, SET, etc.)
+```
+
+Same instance both listens (via subscriber connection) and sends (via publisher connection). Two TCP connections to Redis, two roles.
+
+---
+
+### Revisit Quiz — Redis pub/sub & cross-instance scaling
+
+**Q1:** You have 5 server instances. All subscribe to `room:42`. Client A on Instance 2 sends a message. How many instances receive the Redis PUBLISH event, and what does each one do with it?
+
+**A:** All 5 instances receive the PUBLISH event. Each one checks its local room map — instances that have clients in room:42 send the WebSocket frame to those clients. Instances with no local clients in room:42 discard it.
+
+---
+
+**Q2:** A junior engineer says "we only need one Redis connection per instance — we can subscribe and publish on the same connection." What's wrong with this and how does it break in production?
+
+**A:** A subscribed connection is locked in listen-only mode by the Redis protocol. Calling PUBLISH on it gets rejected. In production: the first time the app tries to publish, it errors or hangs. You need two separate connections — one dedicated to SUBSCRIBE (always listening), one for PUBLISH and other commands.
+
+---
+
+**Q3:** Your chat app has 50 instances and 100,000 active rooms. Most rooms have clients on only 1–2 instances. You notice Redis CPU spiking and all instances have high "discard" rates on pub/sub. What architectural change do you make and why?
+
+**A:** Switch to Kafka partitioned by room ID. Each partition is assigned to one instance — only that instance receives messages for rooms in its partition. Redis pub/sub sends every message to all 50 instances regardless of whether they have local clients in that room; at this scale, most deliveries are wasted. Kafka eliminates the fan-out waste by routing messages only to the instance that owns that room's partition.

@@ -41,7 +41,7 @@
 - [x] D12 — API Versioning — how to evolve APIs without breaking clients *(new)*
 
 ### Phase 1 Wrap-up
-- [ ] D13 — **Revision Day 1** — revisit D06–D12, redo any quiz questions you got wrong
+- [x] D13 — **Revision Day 1** — revisit D06–D12, redo any quiz questions you got wrong
 - [ ] D14 — **Revision Day 2** — revisit D01–D05, full Phase 1 quiz sweep
 
 ---
@@ -156,18 +156,18 @@
 
 | Phase | Days | Status |
 |---|---|---|
-| Phase 1 — Foundations | D01–D14 | 12/14 done |
+| Phase 1 — Foundations | D01–D14 | 13/14 done |
 | Phase 2 — Databases | D15–D31 | 0/17 done |
 | Phase 3 — Caching & Queues | D32–D39 | 0/8 done |
 | Phase 4 — System Design | D40–D53 | 0/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **12/76 done** |
+| **Total** | **D01–D76** | **13/76 done** |
 
 ---
 
 ## Progress
-- Current day: D13 — Revision Day 1 (Phase 1 wrap-up)
-- Last completed: D12 — API Versioning (2026-05-31)
-- Streak: 13 days
+- Current day: D14 — Revision Day 2 (Phase 1 wrap-up)
+- Last completed: D13 — Revision Day 1 (2026-06-01)
+- Streak: 14 days

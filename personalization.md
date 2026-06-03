@@ -108,6 +108,10 @@ Every major concept in the session must be tagged with priority so Aryan knows w
 | D07 | "What is Model 3's disadvantage — the 1000 sockets?" | Gap: thought sockets were the problem — every model opens one socket per client; disadvantage is CPU-heavy work on single thread |
 | D09 | "Did not understand the state/CSRF check in OAuth" | Abstract description ("trick your server") didn't land — needed a concrete attacker/victim story with named roles and step-by-step sequence to make the attack real |
 | D09 | "Wanted the full OAuth flow shown with browser + server + storage simultaneously" | Prefers parallel column format when multiple components interact at the same step — show what each layer sees at every moment, not just a single-thread narrative |
+| D14 | "ECDHE will be used to decrypt HTTP frames right?" | Gap: confused ECDHE (key exchange mechanism) with AES (actual cipher). Need to make the ECDHE → KDF → AES chain explicit; ECDHE produces the secret, AES does the encrypting |
+| D14 | "Tell the difference between hashing, encryption, and signature" | Gap: three concepts blurred together. Needed a side-by-side table with reversibility + key + purpose + example, then how all three appear in TLS specifically |
+| D14 | "What is transcript and all here?" | Abstract term "transcript" didn't land — needed a concrete numbered list of actual TLS messages (ClientHello, ServerHello, etc.) plus a diagram showing both sides building it independently |
+| D14 | "ECDHE does get exchanged — how it is transmitted in transcript, everything hashed so client cannot get it back?" | Good critical thinking — caught that ECDHE public parts ARE in the transcript (transmitted in plaintext). Needed explicit public/private split: public_A and public_B transmitted fine, secret_A and secret_B never leave each side |
 
 ---
 

@@ -112,6 +112,8 @@ Every major concept in the session must be tagged with priority so Aryan knows w
 | D14 | "Tell the difference between hashing, encryption, and signature" | Gap: three concepts blurred together. Needed a side-by-side table with reversibility + key + purpose + example, then how all three appear in TLS specifically |
 | D14 | "What is transcript and all here?" | Abstract term "transcript" didn't land — needed a concrete numbered list of actual TLS messages (ClientHello, ServerHello, etc.) plus a diagram showing both sides building it independently |
 | D14 | "ECDHE does get exchanged — how it is transmitted in transcript, everything hashed so client cannot get it back?" | Good critical thinking — caught that ECDHE public parts ARE in the transcript (transmitted in plaintext). Needed explicit public/private split: public_A and public_B transmitted fine, secret_A and secret_B never leave each side |
+| D15 | "I queried for 20 — it's an internal node — does it store a pointer?" | Caught that my simplified B-Tree diagram was inaccurate. PostgreSQL uses B+ Tree: internal nodes are routing-only; every queryable key with its ctid lives in a leaf node. 20 exists in both internal (separator) and leaf (with ctid). |
+| D15 | "What does INCLUDE do in the tree?" | Good internals question — wanted to know the physical placement. INCLUDE columns are stored only in leaf nodes, invisible to internal nodes. Enables Index Only Scan. |
 
 ---
 

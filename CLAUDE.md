@@ -48,7 +48,7 @@
 
 ## Phase 2 — Databases (D15–D31)
 
-- [ ] D15 — SQL fundamentals for production (indexes, EXPLAIN, N+1 problem)
+- [x] D15 — SQL fundamentals for production (indexes, EXPLAIN, N+1 problem)
 - [ ] D16 — PostgreSQL internals — MVCC, WAL, vacuum
 - [ ] D17 — Indexing deep dive — B-Tree, composite, partial, covering indexes
 - [ ] D18 — SQL vs NoSQL — when to pick which and why
@@ -157,17 +157,17 @@
 | Phase | Days | Status |
 |---|---|---|
 | Phase 1 — Foundations | D01–D14 | 14/14 done ✓ |
-| Phase 2 — Databases | D15–D31 | 0/17 done |
+| Phase 2 — Databases | D15–D31 | 1/17 done |
 | Phase 3 — Caching & Queues | D32–D39 | 0/8 done |
 | Phase 4 — System Design | D40–D53 | 0/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **14/76 done** |
+| **Total** | **D01–D76** | **15/76 done** |
 
 ---
 
 ## Progress
-- Current day: D15 — SQL fundamentals for production (Phase 2 starts)
-- Last completed: D14 — Revision Day 2 (2026-06-03)
-- Streak: 15 days
+- Current day: D16 — PostgreSQL internals (MVCC, WAL, vacuum)
+- Last completed: D15 — SQL fundamentals for production (2026-06-04)
+- Streak: 16 days

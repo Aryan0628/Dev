@@ -72,7 +72,7 @@
 
 ## Phase 3 — Caching & Queues (D32–D39)
 
-- [ ] D32 — Caching strategies — cache-aside, write-through, write-behind
+- [x] D32 — Caching strategies — cache-aside, write-through, write-behind
 - [ ] D33 — Cache invalidation — TTL, event-driven, cache stampede / thundering herd
 - [ ] D34 — CDN deep dive — edge caching, cache-control headers, purging
 - [ ] D35 — Message queues overview — why async matters, at-least-once vs exactly-once
@@ -158,16 +158,16 @@
 |---|---|---|
 | Phase 1 — Foundations | D01–D14 | 14/14 done ✓ |
 | Phase 2 — Databases | D15–D31 | 2/17 done |
-| Phase 3 — Caching & Queues | D32–D39 | 0/8 done |
+| Phase 3 — Caching & Queues | D32–D39 | 1/8 done |
 | Phase 4 — System Design | D40–D53 | 0/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **16/76 done** |
+| **Total** | **D01–D76** | **17/76 done** |
 
 ---
 
 ## Progress
-- Current day: D32 — Caching strategies (Phase 3 start)
-- Last completed: D26 — Redis internals (2026-06-07)
+- Current day: D33 — Cache invalidation (TTL, stampede, thundering herd)
+- Last completed: D32 — Caching strategies (2026-06-07)
 - Streak: 17 days

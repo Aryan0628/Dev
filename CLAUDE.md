@@ -59,7 +59,7 @@
 - [ ] D23 — Transactions Part 1 — ACID properties, isolation levels
 - [ ] D24 — Transactions Part 2 — deadlocks, practical patterns, when to avoid transactions *(split — too much for one session)*
 - [ ] D25 — Connection pooling — why it matters, PgBouncer
-- [ ] D26 — Redis internals — data structures, persistence (RDB vs AOF)
+- [x] D26 — Redis internals — data structures, persistence (RDB vs AOF)
 - [ ] D27 — Multi-region databases — read replicas, active-active
 - [ ] D28 — Database migrations — zero-downtime migrations, expand-contract pattern *(new)*
 
@@ -157,17 +157,17 @@
 | Phase | Days | Status |
 |---|---|---|
 | Phase 1 — Foundations | D01–D14 | 14/14 done ✓ |
-| Phase 2 — Databases | D15–D31 | 1/17 done |
+| Phase 2 — Databases | D15–D31 | 2/17 done |
 | Phase 3 — Caching & Queues | D32–D39 | 0/8 done |
 | Phase 4 — System Design | D40–D53 | 0/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **15/76 done** |
+| **Total** | **D01–D76** | **16/76 done** |
 
 ---
 
 ## Progress
-- Current day: D16 — PostgreSQL internals (MVCC, WAL, vacuum)
-- Last completed: D15 — SQL fundamentals for production (2026-06-04)
-- Streak: 16 days
+- Current day: D32 — Caching strategies (Phase 3 start)
+- Last completed: D26 — Redis internals (2026-06-07)
+- Streak: 17 days

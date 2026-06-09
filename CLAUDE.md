@@ -75,7 +75,7 @@
 - [x] D32 — Caching strategies — cache-aside, write-through, write-behind
 - [x] D33 — Cache invalidation — TTL, event-driven, cache stampede / thundering herd
 - [x] D34 — CDN deep dive — edge caching, cache-control headers, purging
-- [ ] D35 — Message queues overview — why async matters, at-least-once vs exactly-once
+- [x] D35 — Message queues overview — why async matters, at-least-once vs exactly-once
 - [ ] D36 — Kafka internals Part 1 — topics, partitions, offsets, producers
 - [ ] D37 — Kafka internals Part 2 — consumer groups, retention, rebalancing *(split — consumer groups alone need a full session)*
 
@@ -158,16 +158,16 @@
 |---|---|---|
 | Phase 1 — Foundations | D01–D14 | 14/14 done ✓ |
 | Phase 2 — Databases | D15–D31 | 2/17 done |
-| Phase 3 — Caching & Queues | D32–D39 | 3/8 done |
+| Phase 3 — Caching & Queues | D32–D39 | 4/8 done |
 | Phase 4 — System Design | D40–D53 | 0/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **19/76 done** |
+| **Total** | **D01–D76** | **20/76 done** |
 
 ---
 
 ## Progress
-- Current day: D35 — Message queues overview — why async matters, at-least-once vs exactly-once
-- Last completed: D34 — CDN deep dive (2026-06-08)
-- Streak: 18 days
+- Current day: D36 — Kafka internals Part 1 — topics, partitions, offsets, producers
+- Last completed: D35 — Message queues overview (2026-06-09)
+- Streak: 19 days

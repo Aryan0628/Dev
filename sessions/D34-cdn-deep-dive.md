@@ -370,3 +370,299 @@ User
 | POST/PUT/DELETE requests | No (pass-through) | Yes (surrounding reads) |
 
 Even with a 99% CDN HIT rate, the 1% that misses still hits your app server. Without Redis, all of those go straight to the database. With Redis, most are served from cache. And for all authenticated/private traffic that CDN never caches, Redis is the only cache layer protecting your database.
+
+---
+
+## The Full Request Stack — Where Each Layer Sits [CRITICAL]
+
+This is how all the pieces from D07–D34 fit together in a real production system.
+
+```
+Internet
+    ↓
+[ CDN ]                    ← edge: static assets, public API responses (D34)
+    ↓
+[ API Gateway ]            ← rate limiting, auth (JWT), routing, logging (D10)
+    ↓
+[ Load Balancer ]          ← distributes requests across server instances (D08)
+    ↓
+[ App Server 1 | 2 | 3 ]  ← business logic
+    ↓
+[ Shared Redis ]           ← application cache, sessions, rate limit counters (D26)
+    ↓
+[ Database ]               ← source of truth
+```
+
+These aren't alternatives — they're different layers solving different problems. Each one exists because the layer above doesn't handle what it does.
+
+---
+
+### CDN — D34
+
+**Where:** Closest to the user, globally distributed. Cloudflare, CloudFront.
+
+**Caches what:** Static files (JS, CSS, images) and public API responses (product pages, blog posts — things that are the same for every user).
+
+**Does NOT cache:** Anything authenticated or personalized (`Authorization` header present → CDN bypasses and sends to origin).
+
+---
+
+### API Gateway — D10 [CRITICAL]
+
+**Where:** The single door into your backend. Every external request goes through it.
+
+**Does:**
+- Validates JWT (JSON Web Token — D09) tokens before the request even reaches your servers
+- Rate limits by IP, API key, or user ID
+- Routes `/api/v1/users` to the Users service, `/api/v1/orders` to Orders service
+- Logs every request in one place
+
+**When you have one monolith server:**
+```
+CDN → API Gateway → Monolith Server → Redis → DB
+```
+Still useful. Auth and rate limiting at the edge means your app doesn't need to implement them.
+
+**When you have multiple instances:**
+```
+CDN → API Gateway → [ Server 1 | Server 2 | Server 3 ] → Shared Redis → DB
+```
+The API Gateway may include the load balancer, or the load balancer sits right after it. AWS API Gateway + ALB (Application Load Balancer) is a common combo.
+
+---
+
+### Load Balancer — D08 [IMPORTANT]
+
+**Where:** Between API Gateway and your server instances.
+
+**Does:** Distributes requests. Round-robin, least connections, sticky sessions.
+
+- **With one monolith:** You don't need a load balancer. Nginx acts as the reverse proxy directly.
+- **With multiple instances:** Essential. Without it, you can't scale horizontally at all.
+
+---
+
+### Nginx — D07 [IMPORTANT]
+
+**Where:** Runs on the same machine as your app, or as a standalone reverse proxy.
+
+**Does in a monolith setup:**
+```
+Nginx (port 80/443) → App process (port 3000)
+```
+- Handles TLS (Transport Layer Security — D04) termination
+- Serves static files directly without hitting Node/Python
+- Basic rate limiting (`limit_req_zone` module)
+- Connection limiting
+
+**With multiple instances:** Often replaced by a dedicated load balancer (AWS ALB, HAProxy). You can still run Nginx on each server as a local reverse proxy in front of the app process.
+
+---
+
+### Rate Limiter — Where It Actually Lives [CRITICAL]
+
+This is the most nuanced part because rate limiting can exist at multiple layers.
+
+| Layer | How | Good for | Problem |
+|---|---|---|---|
+| API Gateway | Built-in (Kong, AWS API GW) | Per-API-key, per-user limits | Best default choice |
+| Nginx | `limit_req_zone` | Per-IP connection limiting | Only IP-level, no user awareness |
+| App code + Redis | Sliding window in Redis | Complex rules (per-user + per-endpoint) | You implement it |
+
+**The critical rule with multiple servers:**
+
+If you rate limit inside each server independently, each server has its own counter. With 3 servers and a 100 req/min limit, the effective limit becomes 300 req/min — because a user can hit Server 1 (100 times), Server 2 (100 times), Server 3 (100 times) and none of them know about the others.
+
+**The fix: centralized state.** Either:
+1. API Gateway enforces the limit centrally (one counter, not three)
+2. Redis stores the shared counter — all servers increment the same key
+
+```python
+# Redis-based sliding window rate limiter
+# All 3 servers share this Redis instance
+def is_rate_limited(user_id):
+    key = f"rate:{user_id}"
+    count = redis.incr(key)
+    if count == 1:
+        redis.expire(key, 60)   # window = 60 seconds
+    return count > 100          # limit = 100 req/min
+```
+
+---
+
+### Redis — D26 [CRITICAL]
+
+**Where:** Behind app servers. One shared Redis cluster all instances talk to.
+
+**Does:**
+- Application cache (cache-aside, write-through, write-behind — D32)
+- Session store — user is logged in on Server 1, next request hits Server 2, both read from Redis → same session
+- Rate limit counters (above)
+- Distributed locks (when only one server should run a job at a time)
+
+**Monolith:** Redis can be co-located or separate. Either works. One server → no consistency problem.
+
+**Multiple instances → Redis MUST be shared, external.** If each server had its own local Redis:
+
+```
+Server 1 Redis: { product:123: "Blue Shirt" }
+Server 2 Redis: { product:123: "Blue Shirt" }
+Server 3 Redis: empty (cache miss — went to DB)
+```
+
+Now a write happens — Server 1 updates and invalidates its own Redis. Server 2 still has stale data. Server 3 re-fetches from DB correctly. Three servers, three different states.
+
+**Shared Redis solves this:** one invalidation, all servers see fresh data on next request.
+
+---
+
+## How Updates Propagate — The Full Write Flow [CRITICAL]
+
+Tracing a concrete write: a user updates their profile.
+
+```
+User: PUT /users/123/profile   { name: "Aryan G" }
+```
+
+**Step-by-step:**
+
+```
+1. Request → CDN
+   CDN: "PUT request with Authorization header → not cached, forward to origin"
+
+2. → API Gateway
+   API Gateway: validates JWT, checks rate limit, routes to load balancer
+
+3. → Load Balancer → picks Server 2 (round-robin)
+
+4. Server 2: writes to DB
+   UPDATE users SET name = 'Aryan G' WHERE id = 123
+
+5. Server 2: invalidates Redis key
+   redis.delete("user:123:profile")
+
+6. Server 2: calls CDN purge API
+   DELETE https://api.cloudflare.com/zones/xxx/purge_cache
+   { "files": ["/users/123"] }
+```
+
+**What happens next:**
+
+```
+7. Any server gets next request for user 123:
+   → checks Redis: miss (was deleted in step 5)
+   → fetches from DB: gets "Aryan G"  ← fresh
+   → stores in Redis: { "user:123:profile": "Aryan G" }
+
+8. CDN gets next request for /users/123:
+   → miss (was purged in step 6)
+   → forwards to load balancer → Server N → fresh response
+   → CDN caches fresh response
+```
+
+**Why Server 1 and Server 3 also see fresh data:** They didn't do the write. They don't need to. The shared Redis was invalidated in step 5. Next time Server 1 or 3 handles a request for user 123, they'll get a cache miss, go to DB, get the fresh row. There's no "broadcast to each server" step — the shared cache handles it automatically.
+
+---
+
+### What if Two Servers Write Simultaneously? [IMPORTANT]
+
+Race condition: Server 1 and Server 2 both update user 123 at the same time.
+
+```
+Server 1: DB write → redis.delete("user:123")
+Server 2: DB write → redis.delete("user:123")
+```
+
+Redis deletes are idempotent — deleting a key twice is fine. CDN purge twice is also fine.
+
+The DB write is the real conflict — handled by the database with:
+- **Row-level locking** (pessimistic) — second write waits for the first to commit
+- **Optimistic concurrency** — use a `version` column; `UPDATE ... WHERE version = 5` fails if someone already bumped it to 6, then your app retries with fresh data
+
+The caching layer doesn't need to solve this — the DB does.
+
+---
+
+### Local In-Memory Cache (The Hidden Gotcha) [IMPORTANT]
+
+Some apps use a local dict/hashmap in-process for ultra-fast access without even hitting Redis.
+
+```python
+# In-process cache — dangerous with multiple servers
+_local_cache = {}
+
+def get_user(user_id):
+    if user_id in _local_cache:
+        return _local_cache[user_id]
+    # ...fetch from Redis/DB, populate _local_cache
+```
+
+With multiple instances: Server 1 updates user 123, invalidates Redis, purges CDN. But Server 2 and 3 still have the old object in their in-process memory. No shared invalidation mechanism knows about it.
+
+**Solutions:**
+
+| Fix | How | Trade-off |
+|---|---|---|
+| Short TTL (5s) | Each local entry auto-expires | Accept a tiny stale window |
+| Redis pub/sub broadcast | On write, publish to a Redis channel; all servers subscribe and clear their local entry | More complexity, but near-instant invalidation |
+| Only for truly static data | Config, feature flags — things that never change mid-request | Safest, but limited use |
+
+```
+Redis pub/sub invalidation flow:
+
+Server 1 (writer)                    Redis                    Server 2, 3 (subscribers)
+      │                                │                              │
+      │── PUBLISH "invalidate"  ──────→│                              │
+      │   "user:123"                   │──── push to subscribers ────→│
+      │                                │                              │── delete _local_cache["user:123"]
+```
+
+---
+
+## Full Picture — Monolith vs Multiple Instances [CRITICAL]
+
+### Monolith
+```
+CDN → Nginx (reverse proxy + rate limit) → Single App → Redis → DB
+```
+- No load balancer needed
+- Redis can be local
+- Rate limiting in Nginx or app code
+- Simpler — but one server means one point of failure, no horizontal scale
+
+### Multiple Instances
+```
+CDN
+ ↓
+API Gateway (auth, rate limit — centralized)
+ ↓
+Load Balancer (L7, distributes traffic)
+ ↓
+[ Server 1 | Server 2 | Server 3 ]
+        ↓           ↓           ↓
+            [ Shared Redis ]
+         (sessions, cache, rate counters)
+                    ↓
+              [ Database ]
+```
+
+**On write:** DB write → invalidate shared Redis → purge CDN. All servers see fresh data on next request. No per-server coordination needed.
+
+---
+
+### Cross-session connections
+
+| Concept in this section | Covered in depth |
+|---|---|
+| CDN edge caching, purge APIs, Cache-Control | D34 (this cheatsheet, above) |
+| API Gateway auth, rate limiting, routing | D10 |
+| Load Balancer algorithms, L4 vs L7 | D08 |
+| Nginx reverse proxy, TLS termination | D07 |
+| Redis internals, data structures, persistence | D26 |
+| Cache-aside, write-through, write-behind | D32 |
+| Cache invalidation, stampede, TTL | D33 |
+| JWT validation, session vs token auth | D09 |
+
+---
+
+**One-line answer:** CDN caches at the edge, API Gateway enforces rules at the door, load balancer distributes load, Redis is the shared brain behind all servers, DB is the source of truth. A write touches DB first, then invalidates Redis, then purges CDN — in that order.

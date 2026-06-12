@@ -116,6 +116,9 @@ Every major concept in the session must be tagged with priority so Aryan knows w
 | D15 | "What does INCLUDE do in the tree?" | Good internals question — wanted to know the physical placement. INCLUDE columns are stored only in leaf nodes, invisible to internal nodes. Enables Index Only Scan. |
 | D32 | Quiz Q3: only identified stale data, missed memory growth + cold data crowding | Gap: thinks about correctness failure modes (wrong data) but misses operational failure modes (resource exhaustion). When asking about "what goes wrong", explicitly prompt both dimensions: data correctness AND system resource/operational impact. |
 | D32 | Applied D26 RDB/AOF knowledge to write-behind crash scenario | Good cross-session synthesis. He knows to connect persistence mechanisms to data loss risks. Preemptively link storage/persistence concepts to strategy trade-offs in future caching/queue sessions. |
+| D36 | "now tell when to use Kafka and why" (after seeing "when NOT to use") | Always wants both sides of every trade-off explicitly. If you present "when not to use X", immediately follow with "when TO use X" — don't leave one side missing. |
+| D36 | "how does this happen?" on trade-offs section | Doesn't accept trade-off statements at face value — wants the mechanical explanation of WHY it's a bad fit. When listing trade-offs, explain the failure mechanic, not just "it's overkill." |
+| D36 | "if one consumer is only processing then it would do partition by partition... we can create multiple instances of same consumer?" | Intuited consumer groups before being taught. Good systems thinking — connected partition parallelism to "scale by adding instances." He arrives at correct architectural patterns independently; validate and add precision rather than re-explain. |
 
 ---
 

@@ -119,6 +119,7 @@ Every major concept in the session must be tagged with priority so Aryan knows w
 | D36 | "now tell when to use Kafka and why" (after seeing "when NOT to use") | Always wants both sides of every trade-off explicitly. If you present "when not to use X", immediately follow with "when TO use X" — don't leave one side missing. |
 | D36 | "how does this happen?" on trade-offs section | Doesn't accept trade-off statements at face value — wants the mechanical explanation of WHY it's a bad fit. When listing trade-offs, explain the failure mechanic, not just "it's overkill." |
 | D36 | "if one consumer is only processing then it would do partition by partition... we can create multiple instances of same consumer?" | Intuited consumer groups before being taught. Good systems thinking — connected partition parallelism to "scale by adding instances." He arrives at correct architectural patterns independently; validate and add precision rather than re-explain. |
+| D37 | Session delivered — consumer groups, rebalancing, offset management, retention | Aryan had already intuited the core consumer group concept in D36. D37 formalized it with rebalancing protocols (eager vs cooperative), offset commit strategies (the timing problem), retention dangers, and consumer lag monitoring. Key emphasis: the `max.poll.interval.ms` trap and why `auto.offset.reset=none` is safest for critical data. |
 
 ---
 

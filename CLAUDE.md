@@ -89,7 +89,7 @@
 
 - [ ] D40 — Scaling fundamentals — vertical vs horizontal, stateless services
 - [ ] D41 — Zero to million users — how a system evolves step by step
-- [ ] D42 — Microservices vs Monolith — trade-offs, when to split
+- [x] D42 — Microservices vs Monolith — trade-offs, when to split
 - [ ] D43 — gRPC vs REST — protobuf, streaming, when to prefer gRPC
 - [ ] D44 — Event-driven architecture — pub/sub, event sourcing basics
 - [ ] D45 — Idempotency — why it matters, how to implement it
@@ -159,15 +159,15 @@
 | Phase 1 — Foundations | D01–D14 | 14/14 done ✓ |
 | Phase 2 — Databases | D15–D31 | 2/17 done |
 | Phase 3 — Caching & Queues | D32–D39 | 6/8 done |
-| Phase 4 — System Design | D40–D53 | 0/14 done |
+| Phase 4 — System Design | D40–D53 | 1/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **22/76 done** |
+| **Total** | **D01–D76** | **23/76 done** |
 
 ---
 
 ## Progress
-- Current day: D38 — Revision Day 1 — cache invalidation + Kafka consumer groups (hardest parts)
-- Last completed: D37 — Kafka internals Part 2 (2026-06-13)
-- Streak: 21 days
+- Current day: D43 — gRPC vs REST — protobuf, streaming, when to prefer gRPC
+- Last completed: D42 — Microservices vs Monolith (2026-06-16)
+- Streak: 22 days

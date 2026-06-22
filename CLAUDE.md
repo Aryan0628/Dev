@@ -92,7 +92,7 @@
 - [x] D42 — Microservices vs Monolith — trade-offs, when to split
 - [x] D43 — gRPC vs REST — protobuf, streaming, when to prefer gRPC
 - [x] D44 — Event-driven architecture — pub/sub, event sourcing basics
-- [ ] D45 — Idempotency — why it matters, how to implement it
+- [x] D45 — Idempotency — why it matters, how to implement it
 - [ ] D46 — Distributed transactions Part 1 — 2PC (Two-Phase Commit), where it breaks
 - [ ] D47 — Distributed transactions Part 2 — Saga pattern, choreography vs orchestration *(split — architecturally very different from 2PC)*
 - [ ] D48 — Rate limiting — token bucket, sliding window, implementation
@@ -159,15 +159,15 @@
 | Phase 1 — Foundations | D01–D14 | 14/14 done ✓ |
 | Phase 2 — Databases | D15–D31 | 2/17 done |
 | Phase 3 — Caching & Queues | D32–D39 | 6/8 done |
-| Phase 4 — System Design | D40–D53 | 3/14 done |
+| Phase 4 — System Design | D40–D53 | 4/14 done |
 | Phase 5 — Observability | D54–D60 | 0/7 done |
 | Phase 6 — Security | D61–D66 | 0/6 done |
 | Phase 7 — DevOps & Cloud | D67–D76 | 0/10 done |
-| **Total** | **D01–D76** | **25/76 done** |
+| **Total** | **D01–D76** | **26/76 done** |
 
 ---
 
 ## Progress
-- Current day: D45 — Idempotency — why it matters, how to implement it
-- Last completed: D44 — Event-driven architecture (2026-06-18)
-- Streak: 24 days
+- Current day: D48 — Rate limiting — token bucket, sliding window, implementation
+- Last completed: D45 — Idempotency (2026-06-19)
+- Streak: 25 days
